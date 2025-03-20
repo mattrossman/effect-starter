@@ -6,18 +6,21 @@
     "dev": "tsx watch src/main.ts",
     "check": "tsc --noEmit",
     "lint": "eslint .",
+    "test": "vitest",
     "jaeger": "docker run --rm --name jaeger -p 16686:16686 -p 4317:4317 -p 4318:4318 -p 5778:5778 -p 9411:9411 jaegertracing/jaeger:2.3.0"
   },
   "author": "Matt Rossman",
   "license": "MIT",
   "devDependencies": {
+    "@effect/vitest": "^0.20.0",
     "@eslint/js": "^9.22.0",
     "@tsconfig/node23": "^23.0.0",
     "@types/node": "^22.13.10",
     "eslint": "^9.22.0",
     "tsx": "^4.19.3",
     "typescript": "^5.8.2",
-    "typescript-eslint": "^8.27.0"
+    "typescript-eslint": "^8.27.0",
+    "vitest": "^3.0.9"
   },
   "engines": {
     "node": "^23.0.0"
