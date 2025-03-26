@@ -20,7 +20,7 @@ const parsed = schema.safeParse(process.env)
 if (!parsed.success) {
   console.error(
     "❌ Invalid environment variables:",
-    JSON.stringify(parsed.error.format(), null, 4)
+    JSON.stringify(parsed.error.format(), null, 4),
   )
   process.exit(1)
 }
