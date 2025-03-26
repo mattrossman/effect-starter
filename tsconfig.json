@@ -8,6 +8,11 @@
       "~/*": ["./src/*"]
     },
     "module": "ESNext",
-    "moduleResolution": "bundler"
+    "moduleResolution": "bundler",
+    "plugins": [
+      {
+        "name": "@effect/language-service"
+      }
+    ]
   }
 }

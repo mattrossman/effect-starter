@@ -12,6 +12,7 @@
   "author": "Matt Rossman",
   "license": "MIT",
   "devDependencies": {
+    "@effect/language-service": "^0.4.0",
     "@effect/vitest": "^0.20.0",
     "@eslint/js": "^9.22.0",
     "@tsconfig/node23": "^23.0.0",
