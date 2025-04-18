@@ -1,16 +1,17 @@
-import { NodeSdk } from "@effect/opentelemetry"
 import { NodeRuntime } from "@effect/platform-node"
-import { BatchSpanProcessor } from "@opentelemetry/sdk-trace-base"
-import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-http"
-import { Effect } from "effect"
+import { FetchHttpClient } from "@effect/platform"
+import * as Otlp from "@effect/opentelemetry/Otlp"
+import { Effect, Layer } from "effect"
 
-const NodeSdkLive = NodeSdk.layer(() => ({
-  resource: { serviceName: "effect" },
-  spanProcessor: new BatchSpanProcessor(new OTLPTraceExporter()),
-}))
+const Observability = Otlp.layer({
+  baseUrl: "http://localhost:4318",
+  resource: {
+    serviceName: "effect",
+  },
+}).pipe(Layer.provide(FetchHttpClient.layer))
 
 const program = Effect.gen(function* () {
   yield* Effect.log("Hello Effect!")
 }).pipe(Effect.withSpan("program"))
 
-program.pipe(Effect.provide(NodeSdkLive), NodeRuntime.runMain)
+program.pipe(Effect.provide(Observability), NodeRuntime.runMain)
