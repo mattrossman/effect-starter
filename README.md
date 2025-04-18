@@ -1,4 +1,4 @@
-# Node.js Starter
+# Node.js + Effect Starter
 
 ## Create project
 
