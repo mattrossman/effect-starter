@@ -1,5 +1,5 @@
-import { NodeRuntime } from "@effect/platform-node"
-import { FetchHttpClient } from "@effect/platform"
+import { NodeContext, NodeRuntime } from "@effect/platform-node"
+import { FetchHttpClient, PlatformConfigProvider } from "@effect/platform"
 import * as Otlp from "@effect/opentelemetry/Otlp"
 import { Effect, Layer } from "effect"
 
@@ -14,4 +14,9 @@ const program = Effect.gen(function* () {
   yield* Effect.log("Hello Effect!")
 }).pipe(Effect.withSpan("program"))
 
-program.pipe(Effect.provide(Observability), NodeRuntime.runMain)
+const MainLayer = Layer.mergeAll(
+  Observability,
+  PlatformConfigProvider.layerDotEnvAdd(".env"),
+).pipe(Layer.provideMerge(NodeContext.layer))
+
+program.pipe(Effect.provide(MainLayer), NodeRuntime.runMain)
